@@ -3,9 +3,8 @@ package com.aman.ainpc;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.client.event.ClientChatEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.io.*;
@@ -17,7 +16,7 @@ public class ChatListener {
 
     public static boolean talkingToNPC = false;
     public static boolean isThinking = false;
-    public static ServerPlayer currentNPC = null;
+    public static AINPCEntity currentNPC = null;
 
     // ================= AI =================
     private static String sendToAI(String message) {
@@ -76,7 +75,6 @@ public class ChatListener {
         if (currentNPC != null) {
             currentNPC.setDeltaMovement(0, 0, 0);
             currentNPC.setSprinting(false);
-            currentNPC.setShiftKeyDown(false);
         }
     }
 
@@ -146,8 +144,9 @@ public class ChatListener {
                     makeNPCLookAtPlayer();
                     keepNPCStill();
 
-                    mc.player.sendSystemMessage(
-                            Component.literal("AI NPC: " + cleanReply)
+                    mc.player.displayClientMessage(
+                            Component.literal("AI NPC: " + cleanReply),
+                            false
                     );
 
                     double x = currentNPC.getX();
