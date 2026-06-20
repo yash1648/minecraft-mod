@@ -21,7 +21,7 @@ public class ChatListener {
     // ================= AI =================
     private static String sendToAI(String message) {
         try {
-            URL url = new URL("http://127.0.0.1:5000/chat");
+            URL url = new URL(Config.aiServerUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestMethod("POST");

@@ -13,7 +13,7 @@ public class NPCCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 Commands.literal("spawnnpc")
-                        .requires(source -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(2))))
+                        .requires(source -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(Config.npcOpLevel))))
                         .executes(context -> {
                             ServerLevel level = context.getSource().getLevel();
 
@@ -22,7 +22,7 @@ public class NPCCommand {
                                     level
                             );
 
-                            npc.setCustomName(net.minecraft.network.chat.Component.literal("AI NPC"));
+                            npc.setCustomName(net.minecraft.network.chat.Component.literal(Config.npcName));
                             npc.setCustomNameVisible(true);
 
                             npc.setPos(
@@ -34,7 +34,7 @@ public class NPCCommand {
                             level.addFreshEntity(npc);
 
                             context.getSource().sendSuccess(
-                                    () -> net.minecraft.network.chat.Component.literal("NPC spawned"),
+                                    () -> net.minecraft.network.chat.Component.literal(Config.npcName + " spawned"),
                                     true
                             );
 
