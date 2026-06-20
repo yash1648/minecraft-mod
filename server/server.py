@@ -30,11 +30,11 @@ def chat():
     payload = {
         "model": NVIDIA_MODEL,
         "messages": [
-            {"role": "system", "content": "You are an AI NPC in Minecraft. Keep replies short, immersive, and in-character."},
+            {"role": "system", "content": "You are a friendly villager NPC in Minecraft. Always respond in 1 short sentence like a villager would. Talk about trading, building, village life, or adventures. Use simple words. Never write paragraphs or lists."},
             {"role": "user", "content": msg}
         ],
-        "temperature": 0.7,
-        "max_tokens": 256,
+        "temperature": 0.5,
+        "max_tokens": 60,
         "stream": False
     }
 
